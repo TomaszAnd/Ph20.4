@@ -1,0 +1,136 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{mathtools}
+\usepackage{multicol,caption}
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+\begin{document}
+
+\title{Ph 20.3 – Numerical Solution of Ordinary Differential Equations}
+\author{Tomasz Andrzejewski: 2079389}
+
+\maketitle
+
+\section{Part 1}
+\subsection{The explicit Euler Method: plots of $x(t)$ and $v(t)$}
+
+Figure \ref{fig:xvplot_explicit} demonstrates position's and velocity's evolution with time for the simple harmonic oscillator when simulated via the explicit Euler method. We observe a deviation from the expected constant amplitude.
+
+
+\begin{Figure}
+\centering
+\includegraphics[width=0.7\textwidth]{images/xvplot_explicit.pdf}
+\captionof{figure}{Evolution of position and velocity with time for the explicit Euler method.\\ Plot for $x_{0}=1,v_{0}=1, h=0.1, t=0.1*200=20$.}
+\label{fig:xvplot_explicit}
+\end{Figure}
+
+\newpage
+
+\subsection{The explicit Euler Method: plot of global errors for $x(t)$ and $v(t)$}
+
+Figure \ref{fig:gl_error_explicit} presents the evolution with time of global errors $ x_{analytic}(t_{i}) - x_{i} $ and $ v_{analytic}(t_{i}) - v_{i} $. The increase in amplitude of $x(t)$ and $v(t)$ (see figure \ref{fig:xvplot_explicit}) is reflected in the increase of the global error for $x(t)$ and $v(t)$.
+
+\begin{Figure}
+\centering
+\includegraphics[width=0.7\textwidth]{images/gl_error_explicit.pdf}
+\captionof{figure}{Evolution of the global error (deviation from analytic solution) for position and velocity with time for the explicit Euler method. Plot for $x_{0}=1,v_{0}=1, h=0.1, t=0.1*200=20$.}
+\label{fig:gl_error_explicit}
+\end{Figure}
+
+\newpage
+
+\subsection{The explicit Euler Method: truncation error}
+
+Figure \ref{fig:tr_error_explicit} demonstrates that the truncation error is proportional to time step $h$. The truncation error is the maximum value of $ x_{analytic}(t_{i}) − x_{i} $ versus $h$ for several runs of different $h$ integrating up to the same final time.
+
+\begin{Figure}
+\centering
+\includegraphics[width=0.7\textwidth]{images/tr_error_explicit.pdf}
+\captionof{figure}{Plot (with log scaling on both axes) of the maximum value of $ x_{analytic}(t_{i}) - x_{i} $ versus $h$ for several runs of different time steps $h$ integrating up to the same final time.}
+\label{fig:tr_error_explicit}
+\end{Figure}
+
+\newpage
+\subsection{The explicit Euler Method: evolution of total energy with time}
+
+Figure \ref{fig:energy_explicit} demonstrates that the total normalized energy $E = x^2 + v^2$
+(which should be conserved in this physical system) increases over time. This reflects increase in amplitudes of position and velocity with time as well as increase of their global errors with time. For $t \to \infty $ we have that $E \to \infty $.
+
+\begin{Figure}
+\centering
+\includegraphics[width=0.7\textwidth]{images/energy_explicit.pdf}
+\captionof{figure}{The total normalized energy of the system  $E = x^2 + v^2$ over time.}
+\label{fig:energy_explicit}
+\end{Figure}
+
+\newpage
+\subsection{The implicit Euler Method}
+
+Implement the implicit Euler
+method numerically, and investigate how the global errors and the evolution of the energy
+change with respect to the explicit Euler method (to draw a fair comparison, use the same
+h for both methods).
+
+Figure \ref{fig:energy_implicit} demonstrates that the total normalized energy $E = x^2 + v^2$ for the implicit Euler method decreases over time with $E \to 0 $ for $t \to \infty $. This reflects decrease in amplitudes of position and velocity with time (see fig. \ref{fig:xvplot_implicit}) as well as increase of their global errors with time (see fig. \ref{fig:tr_error_implicit}). For $t \to \infty $ we have that $E \to 0$.The global error for the implicit Euler method demonstrates similar oscillating pattern as for the explicit Euler method but with a different phase and smaller frequency.
+
+\begin{Figure}
+\centering
+\includegraphics[width=0.7\textwidth]{images/energy_implicit.pdf}
+\captionof{figure}{The total normalized energy of the system  $E = x^2 + v^2$ over time. Plot for $x_{0}=1,v_{0}=1, h=0.1, t=0.1*200=20$.}
+\label{fig:energy_implicit}
+\end{Figure}
+
+\begin{Figure}
+\centering
+\includegraphics[width=0.7\textwidth]{images/xvplot_implicit.pdf}
+\captionof{figure}{Evolution of position and velocity with time for the implicit Euler method. Plot for $x_{0}=1,v_{0}=1, h=0.1, t=0.1*200=20$.}
+\label{fig:xvplot_implicit}
+\end{Figure}
+
+\begin{Figure}
+\centering
+\includegraphics[width=0.7\textwidth]{images/tr_error_implicit.pdf}
+\captionof{figure}{Plot (with log scaling on both axes) of the maximum value of $ x_{analytic}(t_{i}) − x_{i} $ versus $h$ for several runs of different time steps $h$ integrating up to the same final time. Plot for $x_{0}=1,v_{0}=1, h=0.1, t=0.1*200=20$.}
+\label{fig:tr_error_implicit}
+\end{Figure}
+
+\section{Part 2}
+\subsection{The explicit and implicit Euler methods: phase space}
+
+Figure \ref{fig:phase_space_Euler} demonstrates that the curves corresponding to the phase space of explicit and implicit Euler methods are not closed and they clearly differ from the circle representing the phase space of the analytic solution. The geometry of phase space for the Euler methods correspond to the evolution of their total energies in time. Increasing total energy in explicit Euler method results in increasing radius of curvature.
+
+\begin{Figure}
+\centering
+\includegraphics[width=0.7\textwidth]{images/phase_space_Euler.pdf}
+\captionof{figure}{The phase space trajectory of the implicit and explicit Euler methods compared to the analytic solution. Plot for $x_{0}=1,v_{0}=1, h=0.01, t=0.1*1000=100$.}
+\label{fig:phase_space_Euler}
+\end{Figure}
+
+\newpage
+\subsection{The symplectic Euler method: phase space}
+
+Figure \ref{fig:phase_space_symplectic} demonstrates that the phase space for symplectic Euler method approximates the analytic solution very well.
+
+\begin{Figure}
+\centering
+\includegraphics[width=0.7\textwidth]{images/phase_space_symplectic.pdf}
+\captionof{figure}{The phase space trajectory of the implicit and explicit Euler methods compared to the analytic solution. Plot for $x_{0}=1,v_{0}=1, h=0.01, t=0.1*1000=100$.}
+\label{fig:phase_space_symplectic}
+\end{Figure}
+
+\subsection{The symplectic Euler Method: evolution of total energy with time}
+
+Figure \ref{fig:energy_symplectic} demonstrates that the normalized to total energy for the symplectic Euler method oscillates between the constant amplitudes.
+
+\begin{Figure}
+\centering
+\includegraphics[width=0.7\textwidth]{images/energy_symplectic.pdf}
+\captionof{figure}{The evolution of the errors obtained for the symplectic Euler method with time.}
+\label{fig:energy_symplectic}
+\end{Figure}
+
+
+\end{document}
