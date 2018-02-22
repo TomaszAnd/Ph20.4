@@ -181,20 +181,3 @@ def phase_space(x_o, v_o, h, N, methods, filename):
     ax.legend()
     fig.savefig(filename)
     plt.close(fig)
-
-
-# Run the program
-# and plot everything
-""""
-trajectory_plot(1, 1, 0.1, 200, "explicit", "xvplot_explicit.pdf")
-error_plot(1, 1, 0.1, 200, "explicit", "gl_error_explicit.pdf")
-trunc_err(1, 1, 0.1, 1, "explicit", "tr_error_explicit.pdf")
-energy_plot(1, 1, 0.1, 200, "explicit", "energy_explicit.pdf")
-energy_plot(1, 1, 0.1, 200, "implicit", "energy_implicit.pdf")
-error_plot(1, 1, 0.1, 200, "implicit", "gl_error_implicit.pdf")
-"""
-trunc_err(1, 1, 0.1, 1, "explicit", "tr_error_explicit.pdf")
-trunc_err(1, 1, 0.1, 1, "implicit", "tr_error_implicit.pdf")
-#phase_space(1, 1, 0.01, 1000, ["implicit","explicit"], "phase_space_Euler.pdf")
-#energy_plot(1, 1, 0.1, 200, "symplectic", "energy_symplectic.pdf")
-#phase_space(1, 1, 0.01, 1000, ["symplectic"], "phase_space_symplectic.pdf")
